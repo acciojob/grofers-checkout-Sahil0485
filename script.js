@@ -1,27 +1,12 @@
-// Select all elements with the class "price"
-const priceCells = document.querySelectorAll(".price");
+document.getElementById("calculate").addEventListener("click", () => {
+  const prices = document.querySelectorAll(".price");
+  let total = 0;
 
-// Initialize total sum
-let total = 0;
+  prices.forEach(cell => {
+    const value = parseFloat(cell.textContent.trim());
+    if (!isNaN(value)) total += value;
+  });
 
-// Loop through each price cell and add its value to the total
-priceCells.forEach(cell => {
-    total += parseFloat(cell.textContent); // Convert text to number
+  const ans = document.getElementById("ans");
+  ans.textContent = total;
 });
-
-// Get reference to the table
-const table = document.querySelector("table");
-
-// Create a new table row
-const totalRow = document.createElement("tr");
-
-// Create a single cell that spans both columns
-const totalCell = document.createElement("td");
-totalCell.colSpan = 2; // Merge both columns
-totalCell.textContent = "Total Price: Rs " + total;
-
-// Add the new cell to the new row
-totalRow.appendChild(totalCell);
-
-// Append the new row to the table
-table.appendChild(totalRow);
