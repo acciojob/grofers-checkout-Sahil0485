@@ -1,34 +1,27 @@
- const getSumBtn = document.createElement("button");
-        getSumBtn.append("Get Total Price");
-        document.body.appendChild(getSumBtn);
+// Select all elements with the class "price"
+const priceCells = document.querySelectorAll(".price");
 
-        // Function to calculate the total price
-        const getSum = () => {
-            // Get all price elements from the table
-            const prices = document.querySelectorAll('.price');
-            
-            let totalPrice = 0;
+// Initialize total sum
+let total = 0;
 
-            // Loop through each price element, parse it to a number and add to total
-            prices.forEach(price => {
-                totalPrice += parseFloat(price.textContent); // Parsing the price to float
-            });
+// Loop through each price cell and add its value to the total
+priceCells.forEach(cell => {
+    total += parseFloat(cell.textContent); // Convert text to number
+});
 
-            // Create a new row for displaying the total price
-            const table = document.querySelector('table');
-            const totalRow = document.createElement('tr');
-            const totalCell = document.createElement('td');
+// Get reference to the table
+const table = document.querySelector("table");
 
-            // Set the colspan to 2 to make the cell span across both columns
-            totalCell.setAttribute('colspan', 2);
-            totalCell.textContent = `Total: ₹${totalPrice}`; // Display total with ₹ symbol
+// Create a new table row
+const totalRow = document.createElement("tr");
 
-            // Append the total cell to the new row and then add the row to the table
-            totalRow.appendChild(totalCell);
-            table.appendChild(totalRow);
-        };
+// Create a single cell that spans both columns
+const totalCell = document.createElement("td");
+totalCell.colSpan = 2; // Merge both columns
+totalCell.textContent = "Total Price: Rs " + total;
 
-        // Add event listener to the button to trigger the total calculation
-        getSumBtn.addEventListener("click", getSum);
-getSumBtn.addEventListener("click", getSum);
+// Add the new cell to the new row
+totalRow.appendChild(totalCell);
 
+// Append the new row to the table
+table.appendChild(totalRow);
